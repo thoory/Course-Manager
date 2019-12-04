@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+
+  db:
+    env_file:
+      - .env
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_USER: 'LO54'
+      MYSQL_PASSWORD: ${USER_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${BDD_ROOT_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - "./Volumes/db:/var/lib/mysql"
+      - "./Volumes/catalogueInit.sql:/docker-entrypoint-initdb.d/init.sql"
