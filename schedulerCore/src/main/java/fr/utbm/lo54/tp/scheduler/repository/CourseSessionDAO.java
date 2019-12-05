@@ -36,6 +36,12 @@ public class CourseSessionDAO {
         return courseSessions;
     }
 
+    public List<CourseSessionEntity> getAllWithCourse() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query queryResult = session.createQuery("from CourseSessionEntity c inner join c.course_code inner join c.location_id");
+        return queryResult.list();
+    }
+
     public void update(CourseSessionEntity courseSession) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();

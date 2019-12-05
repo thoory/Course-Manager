@@ -29,9 +29,9 @@ public class Filter extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         CoursesService courseSer = new CoursesService();
-        List<CourseEntity> sessions = courseSer.getAll();
+        List<CourseEntity> courses = courseSer.getAll();
 
-        request.setAttribute("courses", sessions);
+        request.setAttribute("courses", courses);
 
         this.getServletContext().getRequestDispatcher("/Filter.jsp").forward(request, response);
 

@@ -14,6 +14,8 @@ public class CourseSessionEntity implements Serializable {
     private Date startDate;
     private Date endDate;
     private Integer max;
+    private LocationEntity location_id;
+    private CourseEntity course_code;
 
     @Id
     @Column(name = "id")
@@ -57,11 +59,24 @@ public class CourseSessionEntity implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_code", referencedColumnName = "code", nullable = false)
-    public CourseEntity course_code;
+
+    public CourseEntity getCourse_code() {
+        return course_code;
+    }
+
+    public void setCourse_code(CourseEntity course_code) {
+        this.course_code = course_code;
+    }
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id", nullable = false)
-    public LocationEntity location_id;
+    public LocationEntity getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(LocationEntity location_id) {
+        this.location_id = location_id;
+    }
 
     @Override
     public boolean equals(Object o) {

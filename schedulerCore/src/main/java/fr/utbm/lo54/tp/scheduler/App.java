@@ -1,7 +1,9 @@
 package fr.utbm.lo54.tp.scheduler;
 
+import fr.utbm.lo54.tp.scheduler.entity.CourseEntity;
 import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
 import fr.utbm.lo54.tp.scheduler.entity.LocationEntity;
+import fr.utbm.lo54.tp.scheduler.repository.CourseSessionDAO;
 import fr.utbm.lo54.tp.scheduler.service.CourseSessionService;
 import fr.utbm.lo54.tp.scheduler.service.LocationService;
 import fr.utbm.lo54.tp.scheduler.tools.HibernateUtil;
@@ -21,27 +23,23 @@ public class App
     public static void main( String[] args )
     {
 
-        CourseSessionService cSesService = new CourseSessionService();
-        LocationService locSer = new LocationService();
+        CourseSessionDAO sessionList = new CourseSessionDAO();
 
-        List<CourseSessionEntity> courses = cSesService.getAll();
-        courses.forEach( course -> {
-                    System.out.println(course.getStartDate());
-                    System.out.println(course.location_id.getId());
-                    //System.out.println(locSer.getById(course.location_id.getId()));
-                }
-        );
+        CourseSessionEntity courses = sessionList.getById(2);
+        LocationService lser = new LocationService();
+        lser.getById(courses.getId());
 
-        /*CourseSessionEntity c = new CourseSessionEntity();
-        c.setLastname("Besançon");
-        cSesService.save(c);
+        System.out.println(courses.getId());
+        System.out.println(courses.getLocation_id().getCity());
 
-        System.out.println("-------");
-        courses = cSesService.getAll();
-        courses.forEach( course ->
-                System.out.println(course.getLastname())
-        );
+        /*courses.forEach( course -> {
 
-        cSesService.deleteById(10);*/
+            System.out.println(course.getId());
+            System.out.println(course.location_id);
+            System.out.println(course.location_id.getCity());
+            System.out.println(course.course_code);
+            System.out.println(course.course_code.getTitle());
+            }
+        );*/
     }
 }

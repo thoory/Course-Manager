@@ -2,6 +2,7 @@ package fr.utbm.lo54.tp.scheduler.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,7 @@ import java.util.Objects;
 public class LocationEntity implements Serializable {
     private int id;
     private String city;
+    private List<CourseSessionEntity> location_id;
 
     @Id
     @Column(name = "id")
@@ -28,6 +30,16 @@ public class LocationEntity implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "location_id")
+    public List<CourseSessionEntity> getSessions() {
+        return location_id;
+    }
+
+    public void setSessions(List<CourseSessionEntity> c) {
+        location_id = c;
     }
 
     @Override
