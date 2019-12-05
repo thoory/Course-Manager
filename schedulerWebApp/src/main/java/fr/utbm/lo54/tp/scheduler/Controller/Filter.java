@@ -1,6 +1,7 @@
 package fr.utbm.lo54.tp.scheduler.Controller;
 
 import fr.utbm.lo54.tp.scheduler.entity.CourseEntity;
+import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
 import fr.utbm.lo54.tp.scheduler.service.CourseSessionService;
 import fr.utbm.lo54.tp.scheduler.service.CoursesService;
 
@@ -25,39 +26,14 @@ public class Filter extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("coucou");
         response.setContentType("text/html;charset=UTF-8");
-        CoursesService service = new CoursesService();
-        //request.getSession().setAttribute("service", service);
 
-        List<CourseEntity> result = service.getAll();
-        /*List location = service.getAllFormationLoc();
-        String display = "none";
-        String title = (String) request.getParameter("titleFilter");
-        String loc = (String) request.getParameter("locFilter");
-        String date = (String) request.getParameter("dateFilter");
-        if (title != null) {
-            result = service.filterFormation(1, title);
-        }
-        if ((loc != null) && !("vide".equals(loc))) {
+        CoursesService courseSer = new CoursesService();
+        List<CourseEntity> sessions = courseSer.getAll();
 
-            result = service.filterFormation(3, loc);
-        }
-        if ((date != null) && (date.length() != 0)) {
-            result = service.filterFormation(2, date);
-        }
-        if (result.isEmpty()) {
-            display = "";
-            result = service.getAllFormationSession();
-        }*/
+        request.setAttribute("courses", sessions);
 
-        request.setAttribute("visible2", "none");
-
-        request.getSession().setAttribute("result", result);
-        //request.getSession().setAttribute("listLocation", location);
-        //request.getSession().setAttribute("visible", display);
-
-        this.getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/Filter.jsp").forward(request, response);
 
         try (PrintWriter out = response.getWriter()) {
             // TODO output your page here. You may use following sample code.

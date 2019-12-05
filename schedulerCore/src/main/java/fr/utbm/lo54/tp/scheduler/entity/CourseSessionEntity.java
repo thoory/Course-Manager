@@ -57,19 +57,11 @@ public class CourseSessionEntity implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_code", referencedColumnName = "code", nullable = false)
-    private CourseEntity course_code;
+    public CourseEntity course_code;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id", nullable = false)
-    private LocationEntity location_id;
-
-    /*public LocationEntity getLocation_id() {
-        return location_id;
-    }*/
-
-    public void setLocation_id(LocationEntity location) {
-        this.location_id = location;
-    }
+    public LocationEntity location_id;
 
     @Override
     public boolean equals(Object o) {
