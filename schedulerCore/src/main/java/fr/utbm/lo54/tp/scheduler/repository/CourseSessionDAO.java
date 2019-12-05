@@ -3,6 +3,7 @@ package fr.utbm.lo54.tp.scheduler.repository;
 import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
 import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
 import fr.utbm.lo54.tp.scheduler.tools.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -20,7 +21,7 @@ public class CourseSessionDAO {
 
     public CourseSessionEntity getById(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        CourseSessionEntity courseSession =  (CourseSessionEntity) session.get(CourseSessionEntity.class, id);
+        CourseSessionEntity courseSession = session.get(CourseSessionEntity.class, id);
         return courseSession;
     }
 
@@ -32,14 +33,24 @@ public class CourseSessionDAO {
 
     public List<CourseSessionEntity> getByLocation(int locId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<CourseSessionEntity> courseSessions =  (List<CourseSessionEntity>) session.get(CourseSessionEntity.class, locId);
-        return courseSessions;
-    }
+        List<CourseSessionEntity> sessions = null;
+        Transaction tx = null;
 
-    public List<CourseSessionEntity> getAllWithCourse() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query queryResult = session.createQuery("from CourseSessionEntity c inner join c.course_code inner join c.location_id");
-        return queryResult.list();
+        try {
+            tx = session.beginTransaction();
+            String hql = "FROM CourseSessionEntity where location_id = " + locId;
+            Query query = session.createQuery(hql);
+            sessions = query.list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+                e.printStackTrace();
+            }
+        } finally {
+            session.close();
+        }
+        return sessions;
     }
 
     public void update(CourseSessionEntity courseSession) {

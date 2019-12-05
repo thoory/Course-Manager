@@ -10,6 +10,7 @@ import fr.utbm.lo54.tp.scheduler.tools.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.xml.stream.Location;
 import java.util.List;
 
 /**
@@ -23,23 +24,14 @@ public class App
     public static void main( String[] args )
     {
 
-        CourseSessionDAO sessionList = new CourseSessionDAO();
+        System.out.println("coucou");
+        CourseSessionService cSer = new CourseSessionService();
+        List<CourseSessionEntity> l = cSer.getByLocation(1);
 
-        CourseSessionEntity courses = sessionList.getById(2);
-        LocationService lser = new LocationService();
-        lser.getById(courses.getId());
-
-        System.out.println(courses.getId());
-        System.out.println(courses.getLocation_id().getCity());
-
-        /*courses.forEach( course -> {
-
-            System.out.println(course.getId());
-            System.out.println(course.location_id);
-            System.out.println(course.location_id.getCity());
-            System.out.println(course.course_code);
-            System.out.println(course.course_code.getTitle());
-            }
-        );*/
+        l.forEach( x -> {
+            System.out.println(x.getCourse_code());
+            System.out.println(x.getLocation_id().getCity());
+            System.out.println();
+        });
     }
 }

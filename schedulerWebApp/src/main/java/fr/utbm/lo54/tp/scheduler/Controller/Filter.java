@@ -2,8 +2,10 @@ package fr.utbm.lo54.tp.scheduler.Controller;
 
 import fr.utbm.lo54.tp.scheduler.entity.CourseEntity;
 import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
+import fr.utbm.lo54.tp.scheduler.entity.LocationEntity;
 import fr.utbm.lo54.tp.scheduler.service.CourseSessionService;
 import fr.utbm.lo54.tp.scheduler.service.CoursesService;
+import fr.utbm.lo54.tp.scheduler.service.LocationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,10 +30,28 @@ public class Filter extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        CoursesService courseSer = new CoursesService();
-        List<CourseEntity> courses = courseSer.getAll();
+        //init services
+        CourseSessionService sessionService = new CourseSessionService();
+        LocationService locService = new LocationService();
 
-        request.setAttribute("courses", courses);
+        List<CourseSessionEntity> sessions;
+        List<LocationEntity> locationsList = locService.getAll();
+
+        //Parameters
+        String locRequested = (request.getParameter("location") != null) ? request.getParameter("location") : "";
+        LocationEntity currentLoc = null;
+
+        try {
+            int l = Integer.parseInt(locRequested);
+            sessions = sessionService.getByLocation(l);
+            currentLoc = locService.getById(l);
+        } catch (NumberFormatException e) {
+            sessions = sessionService.getAll();
+        }
+
+        request.setAttribute("sessions", sessions);
+        request.setAttribute("locationsList", locationsList);
+        request.setAttribute("currentLoc", currentLoc);
 
         this.getServletContext().getRequestDispatcher("/Filter.jsp").forward(request, response);
 
