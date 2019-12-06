@@ -13,6 +13,7 @@ public class ClientEntity implements Serializable {
     private String address;
     private String phone;
     private String email;
+    private CourseSessionEntity course_session_id;
 
     @Id
     @Column(name = "id")
@@ -72,6 +73,15 @@ public class ClientEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_session_id", referencedColumnName = "id", nullable = false)
+    public CourseSessionEntity getCourse_id() {
+        return course_session_id;
+    }
+
+    public void setCourse_id(CourseSessionEntity location_id) { this.course_session_id = course_session_id;
     }
 
     @Override

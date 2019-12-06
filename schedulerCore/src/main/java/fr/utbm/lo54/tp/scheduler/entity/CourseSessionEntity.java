@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +17,7 @@ public class CourseSessionEntity implements Serializable {
     private Integer max;
     private LocationEntity location_id;
     private CourseEntity course_code;
+    private List<ClientEntity> course_session_id;
 
     @Id
     @Column(name = "id")
@@ -78,6 +80,16 @@ public class CourseSessionEntity implements Serializable {
 
     public void setLocation_id(LocationEntity location_id) {
         this.location_id = location_id;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "course_session_id")
+    public List<ClientEntity> getCourse_session_id() {
+        return course_session_id;
+    }
+
+    public void setCourse_session_id(List<ClientEntity> c) {
+        course_session_id = c;
     }
 
     @Override

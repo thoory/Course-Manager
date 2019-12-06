@@ -101,6 +101,7 @@ public class CourseSessionDAO {
     }
 
     public List<CourseSessionEntity> getByDate(String date) {
+        System.out.println(date);
         Session session = HibernateUtil.getSessionFactory().openSession();
         Calendar c = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -111,15 +112,14 @@ public class CourseSessionDAO {
         }
 
         Query query = session.createQuery("FROM CourseSessionEntity WHERE startDate BETWEEN :d1 AND :d2");
-        query.setParameter("d1", c.getTime());
-
         c.add(Calendar.DATE, 1);
-
+        query.setParameter("d1", c.getTime());
+        c.add(Calendar.DATE, 1);
         query.setParameter("d2", c.getTime());
 
-        List CourseSessions = query.list();
+        List courseSessions = query.list();
 
-        return CourseSessions;
+        return courseSessions;
     }
 
 
