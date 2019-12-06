@@ -16,8 +16,8 @@ CREATE TABLE Course (
 
 CREATE TABLE Course_session (
 	id int AUTO_INCREMENT,
-	start_date DATE NOT NULL,
-	end_date DATE NOT NULL,
+	start_date DATETIME NOT NULL,
+	end_date DATETIME NOT NULL,
 	max int,
 	course_code varchar(255) NOT NULL,
 	location_id int NOT NULL,
@@ -51,23 +51,23 @@ INSERT INTO Course values("GEO","Geographie");
 INSERT INTO Course values("EPS","EPS");
 
 INSERT INTO Course_session (start_date, end_date, max, course_code, location_id)
-values('2019-09-04', '2019-09-04', 60, 'MAT', 1);
+values('2019-09-04 08:30:00', '2019-09-04 10:30:00', 60, 'MAT', 1);
 INSERT INTO Course_session (start_date, end_date, max, course_code, location_id)
-values('2019-09-05', '2019-09-05', 20, 'ENG', 1);
+values('2019-09-05 09:30:00', '2019-09-05 10:30:00', 20, 'ENG', 1);
 INSERT INTO Course_session (start_date, end_date, max, course_code, location_id)
-values('2019-09-08', '2019-09-08', 20, 'GEO', 2);
+values('2019-09-08 08:00:00', '2019-09-08 09:30:00', 20, 'GEO', 2);
 INSERT INTO Course_session (start_date, end_date, max, course_code, location_id)
-values('2019-09-04', '2019-09-04', 20, 'ENG', 2);
+values('2019-09-04 10:30:00', '2019-09-04 12:00:00', 20, 'ENG', 2);
 INSERT INTO Course_session (start_date, end_date, max, course_code, location_id)
-values('2019-09-07', '2019-09-07', 20, 'FRA', 3);
+values('2019-09-07 15:30:00', '2019-09-07 017:30:00', 20, 'FRA', 3);
 INSERT INTO Course_session (start_date, end_date, max, Course_code, location_id)
-values('2019-09-07', '2019-09-07', 20, 'EPS', 3);
+values('2019-09-07 13:00:00', '2019-09-07 14:30:00', 20, 'EPS', 3);
 INSERT INTO Course_session (start_date, end_date, max, Course_code, location_id)
-values('2019-09-05', '2019-09-05', 20, 'FRA', 2);
+values('2019-09-05 10:30:00', '2019-09-05 11:30:00', 20, 'FRA', 2);
 INSERT INTO Course_session (start_date, end_date, max, Course_code, location_id)
-values('2019-09-06', '2019-09-06', 20, 'EPS', 1);
+values('2019-09-06 17:00:00', '2019-09-06 19:30:00', 20, 'EPS', 1);
 INSERT INTO Course_session (start_date, end_date, max, Course_code, location_id)
-values('2019-09-06', '2019-09-06', 20, 'GEO', 3);
+values('2019-09-06 16:30:00', '2019-09-06 18:00:00', 20, 'GEO', 3);
 
 INSERT INTO Client (lastname, firstname, address, phone, email, course_session_id)
 values('DOE', 'John', 'dans la rue', '+33 697683465', 'john.doe@email.com', 1);

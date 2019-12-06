@@ -18,6 +18,12 @@
 <h1>Liste des cours disponibles</h1>
 
 <form action="Filter" method="post">
+    Recherche:
+    <input type="text" name="search" <% if ( request.getAttribute("strRequested") != null ) {%> placeholder="<%=request.getAttribute("strRequested")%>"<%}%>>
+    <input type="submit" value="Submit">
+</form>
+    <br>
+<form action="Filter" method="post">
     Lieux:
     <select name="location">
         <option value="">Tous</option>
@@ -29,6 +35,11 @@
         <option value="<%=loc.getId()%>"<% if ( currentLoc != null && currentLoc.getId() == loc.getId()) {%> selected <%}%>><%=loc.getCity()%></option>
         <%}%>
     </select>
+    <input type="submit" value="Submit">
+</form>
+<br>
+<form action="Filter" method="post">
+    <input type="date" name="date" <% if ( request.getAttribute("currentDate") != null ) {%> value="<%=request.getAttribute("currentDate")%>" <%}%>>
     <input type="submit" value="Submit">
 </form>
 

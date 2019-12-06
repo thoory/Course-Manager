@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Filter extends HttpServlet {
@@ -34,24 +37,53 @@ public class Filter extends HttpServlet {
         CourseSessionService sessionService = new CourseSessionService();
         LocationService locService = new LocationService();
 
-        List<CourseSessionEntity> sessions;
+        List<CourseSessionEntity> sessions = null;
         List<LocationEntity> locationsList = locService.getAll();
 
         //Parameters
+        String courseRequested = request.getParameter("search");
+        String dateRequested = request.getParameter("date");
         String locRequested = (request.getParameter("location") != null) ? request.getParameter("location") : "";
         LocationEntity currentLoc = null;
+        String currentDate = null;
+        String strRequested = null;
 
-        try {
-            int l = Integer.parseInt(locRequested);
-            sessions = sessionService.getByLocation(l);
-            currentLoc = locService.getById(l);
-        } catch (NumberFormatException e) {
+        if ( locRequested != null ) {
+            try {
+                int l = Integer.parseInt(locRequested);
+                sessions = sessionService.getByLocation(l);
+                currentLoc = locService.getById(l);
+            } catch (NumberFormatException e) {
+                sessions = sessionService.getAll();
+            }
+        }
+
+        if ( dateRequested != null ) {
+            try {
+                sessions = sessionService.getByDate(dateRequested);
+                currentDate = dateRequested;
+            } catch (NumberFormatException e) {
+                sessions = sessionService.getAll();
+            }
+        }
+        if ( courseRequested != null ) {
+            try {
+                sessions = sessionService.searchCourse(courseRequested);
+                strRequested = courseRequested;
+            } catch (NumberFormatException e) {
+                sessions = sessionService.getAll();
+            }
+        }
+
+        if (sessions == null ) {
             sessions = sessionService.getAll();
         }
 
         request.setAttribute("sessions", sessions);
         request.setAttribute("locationsList", locationsList);
         request.setAttribute("currentLoc", currentLoc);
+        request.setAttribute("currentDate", currentDate);
+        request.setAttribute("strRequested", strRequested);
 
         this.getServletContext().getRequestDispatcher("/Filter.jsp").forward(request, response);
 

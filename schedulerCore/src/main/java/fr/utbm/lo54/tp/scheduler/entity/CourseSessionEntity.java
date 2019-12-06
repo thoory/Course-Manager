@@ -28,6 +28,7 @@ public class CourseSessionEntity implements Serializable {
     }
 
     @Basic
+    //@Temporal(TemporalType.TIME)
     @Column(name = "start_date")
     public Date getStartDate() {
         return startDate;
@@ -38,6 +39,7 @@ public class CourseSessionEntity implements Serializable {
     }
 
     @Basic
+    //@Temporal(TemporalType.TIME)
     @Column(name = "end_date")
     public Date getEndDate() {
         return endDate;
