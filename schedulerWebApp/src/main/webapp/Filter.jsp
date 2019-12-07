@@ -46,7 +46,6 @@
         </div>
     </div>
 </header>
-
 <!-- education and languages -->
 <section class="container">
     <div class="row">
@@ -57,7 +56,7 @@
                     <div class="education-school">
                         <form action="Filter" method="post">
                             Mots clés:
-                            <input type="text" name="search" <% if ( request.getAttribute("strRequested") != null ) {%> placeholder="<%=request.getAttribute("strRequested")%>"<%}%>>
+                            <input type="text" class="black-input" name="search" <% if ( request.getAttribute("strRequested") != null ) {%> placeholder="<%=request.getAttribute("strRequested")%>"<%}%>>
                             <input type="submit" class="btn btn-default" value="Appliquer">
                         </form>
                         <br>
@@ -70,20 +69,17 @@
                                     LocationEntity currentLoc = (LocationEntity) request.getAttribute("currentLoc");
                                     for (LocationEntity loc: locations) {
                                 %>
-                                <option value="<%=loc.getId()%>"<% if ( currentLoc != null && currentLoc.getId() == loc.getId()) {%> selected <%}%>><%=loc.getCity()%></option>
+                                <option class="black-input" value="<%=loc.getId()%>"<% if ( currentLoc != null && currentLoc.getId() == loc.getId()) {%> selected <%}%>><%=loc.getCity()%></option>
                                 <%}%>
                             </select>
                             <input type="submit" class="btn btn-default" value="Appliquer">
                         </form>
                         <br>
                         <form action="Filter" method="post">
-                            Date: <input type="date" name="date" <% if ( request.getAttribute("currentDate") != null ) {%> value="<%=request.getAttribute("currentDate")%>" <%}%>>
+                            Date: <input type="date" class="black-input" name="date" <% if ( request.getAttribute("currentDate") != null ) {%> value="<%=request.getAttribute("currentDate")%>" <%}%>>
                             <input type="submit" class="btn btn-default" value="Appliquer">
                         </form>
                     </div>
-                    <p class="education-description">
-
-                    </p>
                 </div>
             </div>
         </div>
@@ -98,6 +94,7 @@
                         <th>Fin</th>
                         <th>Localisations</th>
                         <th>Places réservées</th>
+                        <th>Inscription</th>
                     </tr>
                     <%
                         ArrayList<CourseSessionEntity> sessions=(ArrayList<CourseSessionEntity>) request.getAttribute("sessions");
@@ -123,6 +120,9 @@
                                 <%=Math.round(inscrits)%>%
                             </div>
                         </td>
+                        <td>
+                            <a href="Inscription?id=<%=courseSession.getId()%>" class="btn btn-primary" role="button">+</a>
+                        </td>
                     </tr>
                     <%}%>
                 </table>
@@ -130,7 +130,6 @@
         </div>
     </div>
 </section>
-
 <!-- footer section -->
 <footer>
     <div class="container">

@@ -80,28 +80,13 @@ public class CourseSessionDAO {
 
     public List<CourseSessionEntity> getByLocation(int locId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<CourseSessionEntity> sessions = null;
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            String hql = "FROM CourseSessionEntity where location_id="+locId;
-            Query query = session.createQuery(hql);
-            sessions = query.list();
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-                e.printStackTrace();
-            }
-        } finally {
-            session.close();
-        }
-        return sessions;
+        Query query = session.createQuery("FROM CourseSessionEntity WHERE location_id.id = :l1");
+        query.setParameter("l1", locId);
+        List<CourseSessionEntity> CourseSessions = query.list();
+        return CourseSessions;
     }
 
     public List<CourseSessionEntity> getByDate(String date) {
-        System.out.println(date);
         Session session = HibernateUtil.getSessionFactory().openSession();
         Calendar c = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

@@ -8,8 +8,16 @@
     <servlet-name>Filter</servlet-name>
     <servlet-class>fr.utbm.lo54.tp.scheduler.Controller.Filter</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Inscription</servlet-name>
+    <servlet-class>fr.utbm.lo54.tp.scheduler.Controller.Inscription</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Filter</servlet-name>
     <url-pattern>/Filter</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Inscription</servlet-name>
+    <url-pattern>/Inscription</url-pattern>
   </servlet-mapping>
 </web-app>

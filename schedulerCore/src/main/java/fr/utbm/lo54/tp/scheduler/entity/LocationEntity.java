@@ -34,11 +34,11 @@ public class LocationEntity implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "location_id")
-    public List<CourseSessionEntity> getSessions() {
+    public List<CourseSessionEntity> getLocation_id() {
         return location_id;
     }
 
-    public void setSessions(List<CourseSessionEntity> c) {
+    public void setLocation_id(List<CourseSessionEntity> c) {
         location_id = c;
     }
 
