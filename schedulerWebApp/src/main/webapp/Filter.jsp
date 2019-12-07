@@ -63,7 +63,7 @@
                         <form action="Filter" method="post">
                             Localisation:
                             <select name="location">
-                                <option value="" ">Tous</option>
+                                <option value="">Tous</option>
                                 <%
                                     ArrayList<LocationEntity> locations=(ArrayList<LocationEntity>) request.getAttribute("locationsList");
                                     LocationEntity currentLoc = (LocationEntity) request.getAttribute("currentLoc");
