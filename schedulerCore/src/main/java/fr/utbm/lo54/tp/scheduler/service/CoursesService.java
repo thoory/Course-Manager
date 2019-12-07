@@ -14,26 +14,8 @@ public class CoursesService {
         return courses;
     }
 
-    public CourseEntity getById(String code) {
-        CourseEntity course;
-        CourseDAO cDAO = new CourseDAO();
-
-        course = cDAO.getByCode(code);
-        return course;
-    }
-
-    public void update(CourseEntity course) {
-        CourseDAO cDAO = new CourseDAO();
-        cDAO.save(course);
-    }
-
     public void save(CourseEntity course) {
         CourseDAO cDAO = new CourseDAO();
         cDAO.update(course);
-    }
-
-    public void delete(String code) {
-        CourseDAO cDAO = new CourseDAO();
-        cDAO.deleteByCode(code);
     }
 }

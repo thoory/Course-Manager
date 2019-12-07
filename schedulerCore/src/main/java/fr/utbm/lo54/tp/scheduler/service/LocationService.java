@@ -21,19 +21,4 @@ public class LocationService {
         client = lDAO.get(id);
         return client;
     }
-
-    public void update(LocationEntity location) {
-        LocationDAO lDAO = new LocationDAO();
-        lDAO.save(location);
-    }
-
-    public void save(LocationEntity location) {
-        LocationDAO lDAO = new LocationDAO();
-        lDAO.update(location);
-    }
-
-    public void deleteById(int id) {
-        LocationDAO lDAO = new LocationDAO();
-        lDAO.deleteById(id);
-    }
 }

@@ -1,7 +1,5 @@
 package fr.utbm.lo54.tp.scheduler.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -15,9 +13,9 @@ public class CourseSessionEntity implements Serializable {
     private Date startDate;
     private Date endDate;
     private Integer max;
-    private LocationEntity location_id;
-    private CourseEntity course_code;
-    private List<ClientEntity> course_session_id;
+    private LocationEntity location;
+    private CourseEntity course;
+    private List<ClientEntity> clientList;
 
     @Id
     @Column(name = "id")
@@ -64,32 +62,32 @@ public class CourseSessionEntity implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_code", referencedColumnName = "code", nullable = false)
 
-    public CourseEntity getCourse_code() {
-        return course_code;
+    public CourseEntity getCourse() {
+        return course;
     }
 
-    public void setCourse_code(CourseEntity course_code) {
-        this.course_code = course_code;
+    public void setCourse(CourseEntity course_code) {
+        this.course = course_code;
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id", nullable = false)
-    public LocationEntity getLocation_id() {
-        return location_id;
+    public LocationEntity getLocation() {
+        return location;
     }
 
-    public void setLocation_id(LocationEntity location_id) {
-        this.location_id = location_id;
+    public void setLocation(LocationEntity location_id) {
+        this.location = location_id;
     }
 
     @OneToMany
     @JoinColumn(name = "course_session_id")
-    public List<ClientEntity> getCourse_session_id() {
-        return course_session_id;
+    public List<ClientEntity> getClientList() {
+        return clientList;
     }
 
-    public void setCourse_session_id(List<ClientEntity> c) {
-        course_session_id = c;
+    public void setClientList(List<ClientEntity> c) {
+        clientList = c;
     }
 
     @Override

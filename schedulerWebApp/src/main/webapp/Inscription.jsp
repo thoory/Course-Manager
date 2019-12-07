@@ -56,16 +56,16 @@
                             CourseSessionEntity cSession = (CourseSessionEntity) request.getAttribute("cSession");
                         %>
                         <div>
-                            Titre: <%=cSession.getCourse_code().getTitle()%>
+                            Titre: <%=cSession.getCourse().getTitle()%>
                         </div>
                         <div>
                             Horaire: <%=cSession.getStartDate()%> to <%=cSession.getEndDate()%>
                         </div>
                         <div>
-                            Localisation: <%=cSession.getLocation_id().getCity()%>
+                            Localisation: <%=cSession.getLocation().getCity()%>
                         </div>
                         <div>
-                            Nombre de place restantes: <%=cSession.getMax()-cSession.getCourse_session_id().size()%>/<%=cSession.getMax()%>
+                            Nombre de place restantes: <%=cSession.getMax()-cSession.getClientList().size()%>/<%=cSession.getMax()%>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,8 @@
                     ClientEntity client = (ClientEntity) request.getAttribute("client");
                 %>
                 <h2>Inscription validé !</h2>
-                Le cours de <%=cSession.getCourse_code().getTitle()%> du <%=cSession.getEndDate()%> compte <%=client.getFirstname()%> <%=client.getFirstname()%> dans ses participants.
+                Le cours de <%=cSession.getCourse().getTitle()%> du <%=cSession.getEndDate()%> compte maintenant <%=client.getFirstname()%> <%=client.getLastname()%> dans ses participants.
+                <a href="Filter" class="btn btn-default">Liste des cours</a>
                 <%} else {%>
                 <h2>Informations clients</h2>
                 <form class="form-horizontal" action="Inscription?id=<%=cSession.getId()%>" method="POST">

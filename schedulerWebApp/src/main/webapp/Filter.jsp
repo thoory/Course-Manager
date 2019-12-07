@@ -104,15 +104,15 @@
                         for (CourseSessionEntity courseSession: sessions) {
                             startDate = hour.format(courseSession.getStartDate());
                             endDate = hour.format(courseSession.getEndDate());
-                            inscrits = courseSession.getCourse_session_id().size();
+                            inscrits = courseSession.getClientList().size();
                             inscrits = (inscrits/courseSession.getMax())*100;
                     %>
                     <tr>
-                        <td><%=courseSession.getCourse_code().getTitle()%></td>
+                        <td><%=courseSession.getCourse().getTitle()%></td>
                         <td><%=courseSession.getStartDate()%></td>
                         <td><%=startDate%></td>
                         <td><%=endDate%></td>
-                        <td><%=courseSession.getLocation_id().getCity()%></td>
+                        <td><%=courseSession.getLocation().getCity()%></td>
                         <td>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="<%=courseSession.getMax()%>" style="width:<%=inscrits%>%">

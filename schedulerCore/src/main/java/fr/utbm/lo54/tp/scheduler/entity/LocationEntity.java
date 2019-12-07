@@ -10,7 +10,7 @@ import java.util.Objects;
 public class LocationEntity implements Serializable {
     private int id;
     private String city;
-    private List<CourseSessionEntity> location_id;
+    private List<CourseSessionEntity> sessionsList;
 
     @Id
     @Column(name = "id")
@@ -34,12 +34,12 @@ public class LocationEntity implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "location_id")
-    public List<CourseSessionEntity> getLocation_id() {
-        return location_id;
+    public List<CourseSessionEntity> getSessionsList() {
+        return sessionsList;
     }
 
-    public void setLocation_id(List<CourseSessionEntity> c) {
-        location_id = c;
+    public void setSessionsList(List<CourseSessionEntity> c) {
+        sessionsList = c;
     }
 
     @Override

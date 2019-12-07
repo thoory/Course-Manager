@@ -3,7 +3,6 @@ package fr.utbm.lo54.tp.scheduler.service;
 import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
 import fr.utbm.lo54.tp.scheduler.repository.CourseSessionDAO;
 
-import java.util.Date;
 import java.util.List;
 
 public class CourseSessionService {
@@ -45,20 +44,5 @@ public class CourseSessionService {
 
         session = cDAO.getByDate(date);
         return session;
-    }
-
-    public void update(CourseSessionEntity courseSession) {
-        CourseSessionDAO cDAO = new CourseSessionDAO();
-        cDAO.save(courseSession);
-    }
-
-    public void save(CourseSessionEntity courseSession) {
-        CourseSessionDAO cDAO = new CourseSessionDAO();
-        cDAO.update(courseSession);
-    }
-
-    public void delete(CourseSessionEntity courseSession) {
-        CourseSessionDAO cDAO = new CourseSessionDAO();
-        cDAO.delete(courseSession);
     }
 }

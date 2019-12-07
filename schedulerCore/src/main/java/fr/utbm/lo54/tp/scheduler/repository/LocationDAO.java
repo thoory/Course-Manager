@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import javax.xml.stream.Location;
 import java.util.List;
 
 public class LocationDAO {

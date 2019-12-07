@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class ClientDAO {
@@ -26,7 +25,7 @@ public class ClientDAO {
     public void update(ClientEntity client) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.saveOrUpdate(client);
+        session.merge(client);
         transaction.commit();
         session.close();
     }

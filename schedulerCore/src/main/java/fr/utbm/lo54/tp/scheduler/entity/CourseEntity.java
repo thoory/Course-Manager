@@ -10,7 +10,7 @@ import java.util.Objects;
 public class CourseEntity implements Serializable {
     private String code;
     private String title;
-    private List<CourseSessionEntity> course_code;
+    private List<CourseSessionEntity> sessionsList;
 
     @Id
     @Column(name = "code")
@@ -35,11 +35,11 @@ public class CourseEntity implements Serializable {
     @OneToMany
     @JoinColumn(name = "course_code")
     public List<CourseSessionEntity> getSessions() {
-        return course_code;
+        return sessionsList;
     }
 
     public void setSessions(List<CourseSessionEntity> c) {
-        course_code = c;
+        sessionsList = c;
     }
 
     @Override

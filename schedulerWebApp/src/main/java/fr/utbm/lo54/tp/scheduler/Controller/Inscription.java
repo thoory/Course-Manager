@@ -48,7 +48,7 @@ public class Inscription extends HttpServlet {
                 client.setAddress(request.getParameter("address"));
                 client.setEmail(request.getParameter("email"));
                 client.setPhone(request.getParameter("phone"));
-                client.setCourse_id(cSession);
+                client.setCourse(cSession);
 
                 clientService.save(client);
                 request.setAttribute("client", client);

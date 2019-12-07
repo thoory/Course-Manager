@@ -1,25 +1,17 @@
 package fr.utbm.lo54.tp.scheduler.repository;
 
-import fr.utbm.lo54.tp.scheduler.entity.CourseEntity;
-import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
 import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
 import fr.utbm.lo54.tp.scheduler.tools.HibernateUtil;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CourseSessionDAO {
@@ -71,7 +63,7 @@ public class CourseSessionDAO {
 
     public List searchCourse(String request) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM CourseSessionEntity WHERE course_code.title LIKE :p1");
+        Query query = session.createQuery("FROM CourseSessionEntity WHERE course.title LIKE :p1");
         query.setParameter("p1", "%"+request+"%");
         List CourseSessions = query.list();
 
@@ -80,7 +72,7 @@ public class CourseSessionDAO {
 
     public List<CourseSessionEntity> getByLocation(int locId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM CourseSessionEntity WHERE location_id.id = :l1");
+        Query query = session.createQuery("FROM CourseSessionEntity WHERE location.id = :l1");
         query.setParameter("l1", locId);
         List<CourseSessionEntity> CourseSessions = query.list();
         return CourseSessions;
