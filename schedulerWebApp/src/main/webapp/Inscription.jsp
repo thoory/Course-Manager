@@ -1,5 +1,6 @@
 <%@ page import="fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity" %>
-<%@ page import="fr.utbm.lo54.tp.scheduler.entity.ClientEntity" %><%--
+<%@ page import="fr.utbm.lo54.tp.scheduler.entity.ClientEntity" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: thomas
   Date: 24/11/2019
@@ -54,12 +55,21 @@
                     <div class="education-school">
                         <%
                             CourseSessionEntity cSession = (CourseSessionEntity) request.getAttribute("cSession");
+                            SimpleDateFormat dateFormat=new SimpleDateFormat("dd/MM/YYYY");
+                            SimpleDateFormat hourFormat=new SimpleDateFormat("HH:mm");
+
+                            String date = dateFormat.format(cSession.getStartDate());
+                            String start = hourFormat.format(cSession.getStartDate());
+                            String end = hourFormat.format(cSession.getEndDate());
                         %>
                         <div>
                             Titre: <%=cSession.getCourse().getTitle()%>
                         </div>
                         <div>
-                            Horaire: <%=cSession.getStartDate()%> to <%=cSession.getEndDate()%>
+                            Date: <%=date%>
+                        </div>
+                        <div>
+                            Horaire: <%=start%> à <%=end%>
                         </div>
                         <div>
                             Localisation: <%=cSession.getLocation().getCity()%>
@@ -77,8 +87,11 @@
                     ClientEntity client = (ClientEntity) request.getAttribute("client");
                 %>
                 <h2>Inscription validé !</h2>
-                Le cours de <%=cSession.getCourse().getTitle()%> du <%=cSession.getEndDate()%> compte maintenant <%=client.getFirstname()%> <%=client.getLastname()%> dans ses participants.
-                <a href="Filter" class="btn btn-default">Liste des cours</a>
+                Le cours de <%=cSession.getCourse().getTitle()%> du <%=date%> compte maintenant <%=client.getFirstname()%> <%=client.getLastname()%> dans ses participants.
+                <div>
+                    <br>
+                    <a href="Filter" class="btn btn-default">Liste des cours</a>
+                </div>
                 <%} else {%>
                 <h2>Informations clients</h2>
                 <form class="form-horizontal" action="Inscription?id=<%=cSession.getId()%>" method="POST">
@@ -110,11 +123,6 @@
                         <label class="control-label col-sm-2">Email:</label>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" name="email" placeholder="Enter email">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <input type="checkbox" hidden="true">
                         </div>
                     </div>
                     <div class="form-group">

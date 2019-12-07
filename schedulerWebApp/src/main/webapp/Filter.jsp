@@ -63,7 +63,7 @@
                         <form action="Filter" method="post">
                             Localisation:
                             <select name="location">
-                                <option value="">Tous</option>
+                                <option value="" ">Tous</option>
                                 <%
                                     ArrayList<LocationEntity> locations=(ArrayList<LocationEntity>) request.getAttribute("locationsList");
                                     LocationEntity currentLoc = (LocationEntity) request.getAttribute("currentLoc");
@@ -98,18 +98,20 @@
                     </tr>
                     <%
                         ArrayList<CourseSessionEntity> sessions=(ArrayList<CourseSessionEntity>) request.getAttribute("sessions");
-                        SimpleDateFormat hour=new SimpleDateFormat("HH:mm");
-                        String startDate, endDate;
+                        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/MM/YYYY");
+                        SimpleDateFormat hourFormat=new SimpleDateFormat("HH:mm");
+                        String date, startDate, endDate;
                         float inscrits = 0;
                         for (CourseSessionEntity courseSession: sessions) {
-                            startDate = hour.format(courseSession.getStartDate());
-                            endDate = hour.format(courseSession.getEndDate());
+                            date  = dateFormat.format(courseSession.getStartDate());
+                            startDate = hourFormat.format(courseSession.getStartDate());
+                            endDate = hourFormat.format(courseSession.getEndDate());
                             inscrits = courseSession.getClientList().size();
                             inscrits = (inscrits/courseSession.getMax())*100;
                     %>
                     <tr>
                         <td><%=courseSession.getCourse().getTitle()%></td>
-                        <td><%=courseSession.getStartDate()%></td>
+                        <td><%=date%></td>
                         <td><%=startDate%></td>
                         <td><%=endDate%></td>
                         <td><%=courseSession.getLocation().getCity()%></td>

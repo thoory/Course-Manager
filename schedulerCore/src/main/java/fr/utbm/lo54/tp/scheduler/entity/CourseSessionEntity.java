@@ -2,7 +2,7 @@ package fr.utbm.lo54.tp.scheduler.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +28,6 @@ public class CourseSessionEntity implements Serializable {
     }
 
     @Basic
-    //@Temporal(TemporalType.TIME)
     @Column(name = "start_date")
     public Date getStartDate() {
         return startDate;
@@ -39,7 +38,6 @@ public class CourseSessionEntity implements Serializable {
     }
 
     @Basic
-    //@Temporal(TemporalType.TIME)
     @Column(name = "end_date")
     public Date getEndDate() {
         return endDate;

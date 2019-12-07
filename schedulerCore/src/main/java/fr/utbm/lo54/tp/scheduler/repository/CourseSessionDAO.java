@@ -2,14 +2,9 @@ package fr.utbm.lo54.tp.scheduler.repository;
 
 import fr.utbm.lo54.tp.scheduler.entity.CourseSessionEntity;
 import fr.utbm.lo54.tp.scheduler.tools.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -26,39 +21,6 @@ public class CourseSessionDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         CourseSessionEntity courseSession = session.get(CourseSessionEntity.class, id);
         return courseSession;
-    }
-
-    public List<CourseSessionEntity> getWithFilter(String search, String date, int locationId) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<CourseSessionEntity> sessions = null;
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<CourseSessionEntity> query = builder.createQuery(CourseSessionEntity.class);
-            Root<CourseSessionEntity> root = query.from(CourseSessionEntity.class);
-
-            query.select(root);
-            //query.where(builder.equal(root.get("location_id"), locationId));
-            //query.where(builder.between(root.get("startDate"), "2019-09-04", "2019-09-05"));
-            //if (search != null) {
-            //    Join<CourseSessionEntity, CourseEntity> book = root.join(CourseSessionEntity_.course_code);
-            //}
-
-            Query<CourseSessionEntity> q = session.createQuery(query);
-            sessions = q.getResultList();
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-                e.printStackTrace();
-            }
-        } finally {
-            session.close();
-        }
-        return sessions;
     }
 
     public List searchCourse(String request) {
