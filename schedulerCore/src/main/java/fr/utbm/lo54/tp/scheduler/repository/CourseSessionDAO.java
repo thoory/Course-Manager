@@ -51,7 +51,6 @@ public class CourseSessionDAO {
         }
 
         Query query = session.createQuery("FROM CourseSessionEntity WHERE startDate BETWEEN :d1 AND :d2");
-        c.add(Calendar.DATE, 1);
         query.setParameter("d1", c.getTime());
         c.add(Calendar.DATE, 1);
         query.setParameter("d2", c.getTime());

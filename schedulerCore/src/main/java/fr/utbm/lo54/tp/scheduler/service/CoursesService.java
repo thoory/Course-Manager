@@ -9,7 +9,6 @@ public class CoursesService {
     public List<CourseEntity> getAll() {
         List<CourseEntity> courses;
         CourseDAO cDAO = new CourseDAO();
-
         courses = cDAO.getAll();
         return courses;
     }

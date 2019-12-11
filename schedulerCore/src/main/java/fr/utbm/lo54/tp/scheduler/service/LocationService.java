@@ -9,7 +9,6 @@ public class LocationService {
     public List<LocationEntity> getAll() {
         List<LocationEntity> client;
         LocationDAO lDAO = new LocationDAO();
-
         client = lDAO.getAll();
         return client;
     }
@@ -17,7 +16,6 @@ public class LocationService {
     public LocationEntity getById(int id) {
         LocationEntity client;
         LocationDAO lDAO = new LocationDAO();
-
         client = lDAO.get(id);
         return client;
     }
