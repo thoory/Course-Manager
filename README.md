@@ -1,7 +1,7 @@
 # scheduler
 
-## LO54 TP instructions
-Create a planner for a private school using JEE with Maven, Hibernate and JUnit.
+## JEE course, instructions for practical class
+Create a planner for a private school using Maven, Hibernate and JUnit.
 
 ## How to use it
 
